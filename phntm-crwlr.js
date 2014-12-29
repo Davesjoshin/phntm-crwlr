@@ -13,6 +13,8 @@ var domain = [
 	".org",
 	".net",
 	".gov",
+	".mil",
+	".edu"
 ];
 
 for (i=0;i<letters.length;i++) {
