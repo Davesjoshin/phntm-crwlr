@@ -49,14 +49,15 @@ function open_website(){
     page.onError = function (msg, trace) {
       console.log(msg);
     };
-    page.onNavigationRequested = function(url, type, willNavigate, main) {
+    page.onNavigationRequested = function(newurl, type, willNavigate, main) {
       if (    
             main && 
+	url != newurl &&
             (type=="Other" || type=="Undefined") //  type = not by click/submit etc
         ) {
-            url = url.replace(/www\./, "");
+            newurl = newurl.replace(/www\./, "");
             page.close();
-            open_website(url); // reload on new page
+            open_website(newurl); // reload on new page
         }
     }
     page.open(scheme + arrayProdsites[array_position], function(status){
