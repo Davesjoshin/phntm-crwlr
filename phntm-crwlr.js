@@ -46,6 +46,19 @@ var scheme = 'http://www.'
 function open_website(){
     // Open website
     console.log('Opening: ' + scheme  + arrayProdsites[array_position]);
+    page.onError = function (msg, trace) {
+      console.log(msg);
+    };
+    page.onNavigationRequested = function(url, type, willNavigate, main) {
+      if (    
+            main && 
+            (type=="Other" || type=="Undefined") //  type = not by click/submit etc
+        ) {
+            url = url.replace(/www\./, "");
+            page.close();
+            open_website(url); // reload on new page
+        }
+    }
     page.open(scheme + arrayProdsites[array_position], function(status){
         console.log(status);
         // Render
@@ -68,7 +81,7 @@ function open_website(){
         } else {
             phantom.exit();
         }
-    }).onError;
+    });
 }
 
 open_website();
