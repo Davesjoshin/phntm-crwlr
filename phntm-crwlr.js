@@ -1,32 +1,76 @@
 var page = require('webpage').create();
-var letters = [
-	"a", "b", "c", "d",	"e", "f", "g",
-	"h", "i", "j", "k",	"l", "m", "n",
-	"o", "p", "q", "r",	"s", "t", "u",
-	"v", "w", "x", "y", "z", "0", "1",
-	"2", "3", "4", "5",	"6", "7", "8",
-	"9"
-];
+var array_position = 0;
 
-var domain = [
-	".com",
-	".org",
-	".net",
-	".gov",
-	".mil",
-	".edu"
-];
+var arrayProdsites = [
+        "cobnks.com",
+        "aertsonmidtown.com",
+        "hillcrestbank.com",
+        "nbhbank.com",
+        "foodwinerum.com",
+        "visitbarbados.org",
+        "bradentongulfislands.com",
+        "visitcabarrus.com",
+        "paradisebymarriott.com",
+        "admin.paradisebymarriott.com",
+        "thevenetianroom.com",
+        "casadecampo.com.do",
+        "cityway.com",
+        "clubquarters.com",
+        "davenporthotelcollection.com",
+        "dmomojo.com",
+        "dolcehotels.es",
+        "ironworkshotel.com",
+        "ironworksindy.com",
+        "kerzner.com",
+        "fortmyers-sanibel.com",
+        "fortmyers-sanibel.com/island-hopper/",
+        "marcam-images.com/",
+        "mmgyglobal.com",
+        "mortgagelendersofamerica.com",
+        "nationalgeographicexpeditions.com",
+        "newmexico.org",
+        "newmexico.org/trails/",
+        "thehomestead.com",
+        "rancholaspalmas.com",
+        "lacosta.com",
+        "montelucia.com",
+        "outerbanks.org",
+        "rancholaspalmas.com",
+        "kcrestaurantweek.com",
+        "bankmw.com"
+        ];
 
-for (i=0;i<letters.length;i++) {
-	for (d=0;d<domain.length;d++){
-		var url = 'http://www.'+letters[i]+domain[d];
-		console.log(url);
-		page.open(url, function() {
-  		page.render('example.png');
-  		phantom.exit();
-		});
+var scheme = 'http://www.'
 
-	};
-};
+
+function open_website(){
+    // Open website
+    console.log('Opening: ' + scheme  + arrayProdsites[array_position]);
+    page.open(scheme + arrayProdsites[array_position], function(status){
+        console.log(status);
+        // Render
+        if(status === "success") {
+            console.log(" Status: " + status);
+            console.log('');
+            //page.render(array_position + '_example.png');
+        } else {
+            console.log(' Status: Failed');
+            console.log('');
+        }
+
+        // Increment
+        array_position++;
+        page.close();
+
+        // Go to the next or exit
+        if(arrayProdsites.length !== array_position){
+            open_website();
+        } else {
+            phantom.exit();
+        }
+    }).onError;
+}
+
+open_website();
 
 
