@@ -1,6 +1,7 @@
-var page = require('webpage').create();
+var webPage = require('webpage');
 var array_position = 0;
-
+var successes = 0;
+var failures = 0;
 var arrayProdsites = [
         "cobnks.com",
         "aertsonmidtown.com",
@@ -43,34 +44,40 @@ var arrayProdsites = [
 var scheme = 'http://www.'
 
 
-function open_website(){
+function open_website(url){
     // Open website
-    var url = scheme + arrayProdsites[array_position];
-    console.log('Opening: ' + url);
+    var action = '\x1b[33mRedirected\x1b[0m: ';
+    if (!url) {
+        url = scheme + arrayProdsites[array_position] + '/';
+        action = 'Opening: ';
+    }
+    var page = webPage.create();
+    console.log(action + url);
     page.onError = function (msg, trace) {
       console.log(msg);
     };
     page.onNavigationRequested = function(newurl, type, willNavigate, main) {
       if (    
             main && 
-	url != newurl &&
+	    url != newurl &&
             (type=="Other" || type=="Undefined") //  type = not by click/submit etc
         ) {
-            newurl = newurl.replace(/www\./, "");
             page.close();
             open_website(newurl); // reload on new page
-        }
+        }    
     }
     page.open(url, function(status){
         console.log(status);
         // Render
         if(status === "success") {
-            console.log(" Status: " + status);
+            console.log(" Status: \x1b[32m" + status + '\x1b[0m');
             console.log('');
+            successes++;
             //page.render(array_position + '_example.png');
         } else {
-            console.log(' Status: Failed');
+            console.log(' Status: \x1b[31mFailed\x1b[0m');
             console.log('');
+            failures++;
         }
 
         // Increment
@@ -81,6 +88,7 @@ function open_website(){
         if(arrayProdsites.length !== array_position){
             open_website();
         } else {
+            console.log(successes + ' successes, ' + failures + ' failures');
             phantom.exit();
         }
     });
