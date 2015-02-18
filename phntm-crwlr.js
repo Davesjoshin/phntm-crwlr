@@ -67,7 +67,6 @@ function open_website(url){
         }    
     }
     page.open(url, function(status){
-        console.log(status);
         // Render
         if(status === "success") {
             console.log(" Status: \x1b[32m" + status + '\x1b[0m');
