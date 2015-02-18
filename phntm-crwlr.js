@@ -45,7 +45,8 @@ var scheme = 'http://www.'
 
 function open_website(){
     // Open website
-    console.log('Opening: ' + scheme  + arrayProdsites[array_position]);
+    var url = scheme + arrayProdsites[array_position];
+    console.log('Opening: ' + url);
     page.onError = function (msg, trace) {
       console.log(msg);
     };
@@ -60,7 +61,7 @@ function open_website(){
             open_website(newurl); // reload on new page
         }
     }
-    page.open(scheme + arrayProdsites[array_position], function(status){
+    page.open(url, function(status){
         console.log(status);
         // Render
         if(status === "success") {
