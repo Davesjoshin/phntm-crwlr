@@ -1,25 +1,32 @@
 var webPage = require('webpage');
 var array_position = 0;
+var mydate = new Date();
+var now = mydate.valueOf();
+var startTime = now;
 var successes = 0;
 var failures = 0;
+var scheme = 'http://www.';
 var arrayProdsites = [
         "cobnks.com",
         "aertsonmidtown.com",
+        "aspenmeadows.com",
         "hillcrestbank.com",
-        "nbhbank.com",
         "foodwinerum.com",
         "visitbarbados.org",
+       /* USE TO COMMENT OUT URLS FOR SPEEDY TESTING */
         "bradentongulfislands.com",
         "visitcabarrus.com",
         "paradisebymarriott.com",
-        "admin.paradisebymarriott.com",
+        "silveradoresort.com",
         "thevenetianroom.com",
         "casadecampo.com.do",
         "cityway.com",
         "clubquarters.com",
         "davenporthotelcollection.com",
         "dmomojo.com",
+        "dolce.com",
         "dolcehotels.es",
+        "dolcelahulpe.com",
         "ironworkshotel.com",
         "ironworksindy.com",
         "kerzner.com",
@@ -29,6 +36,7 @@ var arrayProdsites = [
         "mmgyglobal.com",
         "mortgagelendersofamerica.com",
         "nationalgeographicexpeditions.com",
+        "nbhbank.com",
         "newmexico.org",
         "newmexico.org/trails/",
         "thehomestead.com",
@@ -40,31 +48,31 @@ var arrayProdsites = [
         "kcrestaurantweek.com",
         "bankmw.com"
         ];
-
-var scheme = 'http://www.'
-
-
 function open_website(url){
     // Open website
     var action = '\x1b[33mRedirected\x1b[0m: ';
+
     if (!url) {
         url = scheme + arrayProdsites[array_position] + '/';
         action = 'Opening: ';
     }
-    var page = webPage.create();
-    console.log(action + url);
-    page.onError = function (msg, trace) {
-      console.log(msg);
-    };
+
+        var page = webPage.create();
+
+        console.log(action + url);
+
+        page.onError = function (msg, trace) {
+                console.log(msg);
+        };
     page.onNavigationRequested = function(newurl, type, willNavigate, main) {
-      if (    
-            main && 
-	    url != newurl &&
-            (type=="Other" || type=="Undefined") //  type = not by click/submit etc
+      if (
+            main &&
+            url != newurl &&
+            (type=="Other" || type=="Undefined") //  type = not by click/submit$
         ) {
             page.close();
             open_website(newurl); // reload on new page
-        }    
+        }
     }
     page.open(url, function(status){
         // Render
@@ -88,6 +96,11 @@ function open_website(url){
             open_website();
         } else {
             console.log(successes + ' successes, ' + failures + ' failures');
+            var endTime = new Date().valueOf();
+            var timeDiff = endTime - startTime;
+            var timeInSecs = timeDiff/1000;
+            console.log('Test suite took ' + timeInSecs + ' seconds to complete$
+            console.log(' ');
             phantom.exit();
         }
     });
