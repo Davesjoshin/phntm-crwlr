@@ -1,4 +1,4 @@
 phntm-crwlr
 ===========
 
-URL crawler using PhantomJS
+Domain tester using PhantomJs
