@@ -7,46 +7,9 @@ var successes = 0;
 var failures = 0;
 var scheme = 'http://www.';
 var arrayProdsites = [
-        "cobnks.com",
-        "aertsonmidtown.com",
-        "aspenmeadows.com",
-        "hillcrestbank.com",
-        "foodwinerum.com",
-        "visitbarbados.org",
-       /* USE TO COMMENT OUT URLS FOR SPEEDY TESTING */
-        "bradentongulfislands.com",
-        "visitcabarrus.com",
-        "paradisebymarriott.com",
-        "silveradoresort.com",
-        "thevenetianroom.com",
-        "casadecampo.com.do",
-        "cityway.com",
-        "clubquarters.com",
-        "davenporthotelcollection.com",
-        "dmomojo.com",
-        "dolce.com",
-        "dolcehotels.es",
-        "dolcelahulpe.com",
-        "ironworkshotel.com",
-        "ironworksindy.com",
-        "kerzner.com",
-        "fortmyers-sanibel.com",
-        "fortmyers-sanibel.com/island-hopper/",
-        "marcam-images.com/",
-        "mmgyglobal.com",
-        "mortgagelendersofamerica.com",
-        "nationalgeographicexpeditions.com",
-        "nbhbank.com",
-        "newmexico.org",
-        "newmexico.org/trails/",
-        "thehomestead.com",
-        "rancholaspalmas.com",
-        "lacosta.com",
-        "montelucia.com",
-        "outerbanks.org",
-        "rancholaspalmas.com",
-        "kcrestaurantweek.com",
-        "bankmw.com"
+        "yahoo.com",
+        "wikipedia.org",
+        "reddit.com/r/raspberry_pi"
         ];
 function open_website(url){
     // Open website
@@ -99,7 +62,7 @@ function open_website(url){
             var endTime = new Date().valueOf();
             var timeDiff = endTime - startTime;
             var timeInSecs = timeDiff/1000;
-            console.log('Test suite took ' + timeInSecs + ' seconds to complete$
+            console.log('Test suite took ' + timeInSecs + ' seconds to complete');
             console.log(' ');
             phantom.exit();
         }
