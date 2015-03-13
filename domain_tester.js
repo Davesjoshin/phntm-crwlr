@@ -77,10 +77,10 @@ function open_website(url){
             timeInSecs = timeDiff/1000;
             var logcontent = [
                     mydate + " ",
-                    timeInSecs + " seconds of runtime",
-                    Prodsites.length + " domains",
-                    successes + " total successes",
-                    failures + " total failures",
+                    " " + timeInSecs + " seconds of runtime",
+                    " " + Prodsites.length + " domains",
+                    " " + successes + " successes",
+                    " " + failures + " failures",
                     ];
             console.log('Test suite took ' + timeInSecs + ' seconds to complete');
             console.log(' ');
