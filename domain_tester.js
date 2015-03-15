@@ -1,26 +1,37 @@
+//modules that we need
 var webPage = require('webpage');
 var fs = require('fs');
 var path = 'log.txt';
-var array_position = 0;
+
+//Working out date stuff for output log
 var mydate = new Date();
-var now = mydate.valueOf();
-var startTime = now;
-var timeInSecs = 0;
+    var now = mydate.valueOf();
+    var day = mydate.getDay();
+    var hours = mydate.getHours();
+    var minutes = mydate.getMinutes();
+    var startTime = now;
+    var timeInSecs = 0;
+
+//starting the count at zero
 var successes = 0;
 var failures = 0;
+var array_position = 0;
+
+//pieces to construct a domain
 var scheme = 'http://www.';
 var Prodsites = [
-        "dolce.com",
-        "surforsound.com",
-        "warwickhotels.com",
-        "silveradoresort.com",
-        "outerbanks.org",
-        "newmexico.org"
+        "reddit.com",
+        "bitpi.co",
+        "yetichute.com",        
+        "news.ycombinator.com"
         ];
 
+//Welcome readout
 console.log(" ");
 console.log("*** Domain Tester ***");
 console.log(" ");
+
+
 
 function open_website(url){
     // Open website
@@ -76,15 +87,16 @@ function open_website(url){
             var timeDiff = endTime - startTime;
             timeInSecs = timeDiff/1000;
             var logcontent = [
-                    mydate + " ",
-                    " " + timeInSecs + " seconds of runtime",
+                    day + " " + hours + ":" + minutes,
+                    " " + timeInSecs + " runtime secs",
                     " " + Prodsites.length + " domains",
                     " " + successes + " successes",
-                    " " + failures + " failures",
-                    ];
+                    " " + failures + " failures"
+            ];
             console.log('Test suite took ' + timeInSecs + ' seconds to complete');
             console.log(' ');
             fs.write(path, logcontent, 'a');
+            fs.write(path, "\n", 'a');
             phantom.exit();
         }
     });
