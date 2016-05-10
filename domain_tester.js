@@ -1,21 +1,21 @@
-//modules that we need
+// Modules that we need
 var webPage = require('webpage');
 var fs = require('fs');
 var path = 'log.txt';
 
-//Working out date stuff for output log
+// Working out date stuff for output log
 var mydate = new Date();
 var now = mydate.valueOf();
 var localtime = mydate.toLocaleString();
 var startTime = now;
 var timeInSecs = 0;
 
-//starting the count at zero
+// Starting the count at zero
 var successes = 0;
 var failures = 0;
 var array_position = 0;
 
-//pieces to construct a domain
+// Pieces to construct a domain
 var scheme = 'http://www.';
 var Prodsites = [
 "reddit.com",
@@ -24,7 +24,7 @@ var Prodsites = [
 "news.ycombinator.com"
 ];
 
-//Welcome readout
+// Welcome readout
 console.log(" ");
 console.log("*** Domain Tester ***");
 console.log(" ");
@@ -60,7 +60,7 @@ console.log(" Page Title: " + page.title);
 console.log('');
 successes++;
 
-//page.render(array_position + '_example.png');
+// page.render(array_position + '_example.png');
 } else {
 console.log(' Status: \x1b[31mFailed\x1b[0m');
 console.log(' Creating screenshot: ' + '\x1b[33m' + Prodsites[array_position] + '.png' + '\x1b[0m');
@@ -100,4 +100,3 @@ phantom.exit();
 });
 }
 open_website();
-
